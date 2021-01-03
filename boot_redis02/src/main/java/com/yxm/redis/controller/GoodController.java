@@ -35,10 +35,8 @@ public class GoodController {
         //redis锁的value
         String value = UUID.randomUUID().toString() + Thread.currentThread().getName();
         try {
-            //加锁
-            boolean flag = stringRedisTemplate.opsForValue().setIfAbsent(REDIS_LOCK, value).booleanValue();//相当于redis的setNX
-            //加过期时间，10秒后会被删除，避免服务宕机，redis无法释放锁的问题
-            stringRedisTemplate.expire(REDIS_LOCK, 10L, TimeUnit.SECONDS);
+//            设置key+过期时间分开了，必须要合并成一行具备原子性
+            boolean flag = stringRedisTemplate.opsForValue().setIfAbsent(REDIS_LOCK, value,10L,TimeUnit.SECONDS).booleanValue();//相当于redis的setNX
             String result = stringRedisTemplate.opsForValue().get("goods:001");
             int goodsNumber = result == null ? 0 : Integer.parseInt(result);
 
