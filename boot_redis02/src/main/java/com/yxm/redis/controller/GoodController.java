@@ -36,7 +36,7 @@ public class GoodController {
         String value = UUID.randomUUID().toString() + Thread.currentThread().getName();
         try {
 //            设置key+过期时间分开了，必须要合并成一行具备原子性
-            boolean flag = stringRedisTemplate.opsForValue().setIfAbsent(REDIS_LOCK, value,10L,TimeUnit.SECONDS).booleanValue();//相当于redis的setNX
+            boolean flag = stringRedisTemplate.opsForValue().setIfAbsent(REDIS_LOCK, value, 10L, TimeUnit.SECONDS).booleanValue();//相当于redis的setNX
             String result = stringRedisTemplate.opsForValue().get("goods:001");
             int goodsNumber = result == null ? 0 : Integer.parseInt(result);
 
@@ -53,8 +53,10 @@ public class GoodController {
             }
             return "商品已经售罄/活动结束/调用超时，欢迎下次光临" + "\t 服务器端口: " + serverPort;
         } finally {//无论如何都会执行的代码块，如果上面的代码出现异常，redis锁也可以正常释放
-            //程序执行完毕，删除redis锁
-            stringRedisTemplate.delete(REDIS_LOCK);
+            if (stringRedisTemplate.opsForValue().get(REDIS_LOCK).equalsIgnoreCase(value)) {//判断redis中REDIS_LOCK的值是否和当前锁的值一致，一致删除锁，否则不删，避免删除别人的锁
+                //程序执行完毕，删除redis锁
+                stringRedisTemplate.delete(REDIS_LOCK);
+            }
         }
     }
 }
