@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
@@ -53,9 +54,20 @@ public class GoodController {
             }
             return "商品已经售罄/活动结束/调用超时，欢迎下次光临" + "\t 服务器端口: " + serverPort;
         } finally {//无论如何都会执行的代码块，如果上面的代码出现异常，redis锁也可以正常释放
-            if (stringRedisTemplate.opsForValue().get(REDIS_LOCK).equalsIgnoreCase(value)) {//判断redis中REDIS_LOCK的值是否和当前锁的值一致，一致删除锁，否则不删，避免删除别人的锁
-                //程序执行完毕，删除redis锁
-                stringRedisTemplate.delete(REDIS_LOCK);
+            while (true) {
+                stringRedisTemplate.watch(REDIS_LOCK);//redis监控锁
+                if (stringRedisTemplate.opsForValue().get(REDIS_LOCK).equalsIgnoreCase(value)) {//判断redis中REDIS_LOCK的值是否和当前锁的值一致，一致删除锁，否则不删，避免删除别人的锁
+                    stringRedisTemplate.setEnableTransactionSupport(true);//开启redis事务功能
+                    stringRedisTemplate.multi();//事务开始
+                    //程序执行完毕，删除redis锁
+                    stringRedisTemplate.delete(REDIS_LOCK);
+                    List<Object> list = stringRedisTemplate.exec();//提交事务
+                    if (null == list) {//如果为空继续循环
+                        continue;
+                    }
+                }
+                stringRedisTemplate.unwatch();
+                break;
             }
         }
     }
