@@ -60,7 +60,11 @@ public class GoodController {
             }
             return "商品已经售罄/活动结束/调用超时，欢迎下次光临" + "\t 服务器端口: " + serverPort;
         } finally {//无论如何都会执行的代码块，如果上面的代码出现异常，redis锁也可以正常释放
-            redissonLock.unlock();//解锁
+            //高并发下，有时会报IllegalMonitorStateException:attempt to unlock lock,not locked by current thread by node id:xxxx这错，需要加下面的判断
+            //还在持有锁的状态，并且是当前线程持有的锁再解锁
+            if (redissonLock.isLocked() && redissonLock.isHeldByCurrentThread()) {
+                redissonLock.unlock();//解锁
+            }
         }
     }
 }
