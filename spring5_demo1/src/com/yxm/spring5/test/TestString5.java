@@ -2,6 +2,7 @@ package com.yxm.spring5.test;
 
 import com.yxm.spring5.Book;
 import com.yxm.spring5.Book1;
+import com.yxm.spring5.Book2;
 import com.yxm.spring5.User;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
@@ -39,6 +40,7 @@ public class TestString5 {
         System.out.println(book);
         book.testDemo();
     }
+
     @Test
     public void testSetter1() {
         //加载配置文件
@@ -48,12 +50,23 @@ public class TestString5 {
         System.out.println(book);
         book.testDemo();
     }
+
     @Test
     public void testConstructor() {
         //加载配置文件
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean1.xml");
         //2.获取对象
         Book1 book = applicationContext.getBean("book1", Book1.class);
+        System.out.println(book);
+        book.testDemo();
+    }
+
+    @Test
+    public void testBook2() {
+        //加载配置文件
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean1.xml");
+        //2.获取对象
+        Book2 book = applicationContext.getBean("book2", Book2.class);
         System.out.println(book);
         book.testDemo();
     }
