@@ -7,6 +7,8 @@ package com.yxm.spring5;
  * @Created by yxm
  */
 public class User {
+    private String name;
+
     public void add(){
         System.out.println("..............add");
     }

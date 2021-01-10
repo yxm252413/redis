@@ -3,5 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="user" class="com.yxm.spring5.User"></bean>
+    <!--<bean id="user" class="com.yxm.spring5.User"></bean>-->
+
+    <!--set注入-->
+    <!--property属性：1.name属性名；2.value属性值-->
+    <bean id="book" class="com.yxm.spring5.Book">
+        <property name="bname" value="狂人日记"></property>
+        <property name="bautor" value="鲁迅"></property>
+    </bean>
 </beans>
