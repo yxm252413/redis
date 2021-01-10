@@ -66,7 +66,7 @@ public class TestString5 {
         //加载配置文件
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean1.xml");
         //2.获取对象
-        Book2 book = applicationContext.getBean("book2", Book2.class);
+        Book2 book = applicationContext.getBean("book3", Book2.class);
         System.out.println(book);
         book.testDemo();
     }
