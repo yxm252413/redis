@@ -40,6 +40,15 @@ public class TestString5 {
         book.testDemo();
     }
     @Test
+    public void testSetter1() {
+        //加载配置文件
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean1.xml");
+        //2.获取对象
+        Book book = applicationContext.getBean("bookk", Book.class);
+        System.out.println(book);
+        book.testDemo();
+    }
+    @Test
     public void testConstructor() {
         //加载配置文件
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean1.xml");

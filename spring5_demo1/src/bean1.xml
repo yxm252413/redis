@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--无参构造-->
@@ -12,6 +13,11 @@
         <property name="bname" value="狂人日记"></property>
         <property name="bautor" value="鲁迅"></property>
     </bean>
+
+    <!--set注入之简化版-->
+    <!--bean标签： p:属性名="属性值"-->
+    <bean id="bookk" class="com.yxm.spring5.Book" p:bname="狂人日记" p:bautor="鲁迅"></bean>
+
     <!--有参构造注入-->
     <!--constructor-arg标签：1.name属性名；2.value属性值-->
     <bean id="book1" class="com.yxm.spring5.Book1">
