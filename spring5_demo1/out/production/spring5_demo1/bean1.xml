@@ -27,7 +27,18 @@
             <null/>
         </property>
     </bean>
-
+    <!--属性值中带有特殊符号-->
+    <!--  1.转义
+      2.使用CDATA-->
+    <bean id="book3" class="com.yxm.spring5.Book2">
+        <property name="bname">
+            <value><![CDATA[<<狂人日记>>]]></value>
+        </property>
+        <!--null值-->
+        <property name="bautor">
+            <null/>
+        </property>
+    </bean>
     <!--有参构造注入-->
     <!--constructor-arg标签：1.name属性名；2.value属性值-->
     <bean id="book1" class="com.yxm.spring5.Book1">
