@@ -2,6 +2,7 @@ package com.yxm.spring5.test;
 
 import com.yxm.spring5.Book2;
 import com.yxm.spring5.bean.Emp;
+import com.yxm.spring5.bean.Stu;
 import com.yxm.spring5.server.UserService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -34,5 +35,16 @@ public class TestBean {
         Emp emp = applicationContext.getBean("emp", Emp.class);
         System.out.println(emp);
         emp.add();
+    }
+
+    //注入属性-集合属性注入array,list,map,set
+    @Test
+    public void test3() {
+        //加载配置文件
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("StuBean.xml");
+        //2.获取对象
+        Stu stu = applicationContext.getBean("stu", Stu.class);
+        System.out.println(stu);
+        stu.test();
     }
 }
