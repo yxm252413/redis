@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--手动装配-->
+    <!--<bean id="emp" class="com.yxm.spring5.autowire.Emp">
+        <property name="dept" ref="dept"></property>
+    </bean>
+    <bean id="dept" class="com.yxm.spring5.autowire.Dept"></bean>-->
+
+    <!--自动装配-->
+    <!--autowire取值：1.byName通过属性名装配，注入bean的id和类中属性名一样；2.byType通过类型装配-->
+    <bean id="emp" class="com.yxm.spring5.autowire.Emp" autowire="byType">
+    </bean>
+    <bean id="dept" class="com.yxm.spring5.autowire.Dept"></bean>
+</beans>

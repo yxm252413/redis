@@ -1,7 +1,9 @@
 package com.yxm.spring5.test;
 
 import com.yxm.spring5.Book2;
+import com.yxm.spring5.autowire.*;
 import com.yxm.spring5.bean.*;
+import com.yxm.spring5.bean.Emp;
 import com.yxm.spring5.factoryBean.MyBean;
 import com.yxm.spring5.server.UserService;
 import org.junit.Test;
@@ -110,5 +112,16 @@ public class TestBean {
 
         //手动销毁
         applicationContext.close();
+    }
+
+    //自动装配
+    @Test
+    public void test9() {
+        //加载配置文件
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("autowire.xml");
+        //2.获取对象
+        com.yxm.spring5.autowire.Emp orders = applicationContext.getBean("emp", com.yxm.spring5.autowire.Emp.class);
+        System.out.println(orders);
+        orders.test();
     }
 }
