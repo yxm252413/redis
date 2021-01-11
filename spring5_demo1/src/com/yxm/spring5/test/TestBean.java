@@ -85,4 +85,19 @@ public class TestBean {
         System.out.println(book1);//com.yxm.spring5.bean.Book@5d11346
         book.test();
     }
+    //验证默认情况下bean是单实例
+    /*<bean id="book" class="com.yxm.spring5.bean.Book" scope="prototype">
+        <property name="list" ref="bookList"></property>
+    </bean>*/
+    @Test
+    public void test7() {
+        //加载配置文件
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("Book.xml");
+        //2.获取对象
+        Book book = applicationContext.getBean("book", Book.class);
+        Book book1 = applicationContext.getBean("book", Book.class);
+        System.out.println(book);//com.yxm.spring5.bean.Book@5d11346a
+        System.out.println(book1);//com.yxm.spring5.bean.Book@7a36aefa
+        book.test();
+    }
 }

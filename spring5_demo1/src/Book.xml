@@ -12,7 +12,7 @@
         <value>redis</value>
     </util:list>
     <!--把提取出来的list集合注入book类的list属性中-->
-    <bean id="book" class="com.yxm.spring5.bean.Book">
+    <bean id="book" class="com.yxm.spring5.bean.Book" scope="prototype">
         <property name="list" ref="bookList"></property>
     </bean>
 </beans>
