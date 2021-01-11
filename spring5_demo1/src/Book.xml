@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                          http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <!--提取List集合属性注入-->
+    <util:list id="bookList">
+        <value>java</value>
+        <value>spring5</value>
+        <value>redis</value>
+    </util:list>
+    <!--把提取出来的list集合注入book类的list属性中-->
+    <bean id="book" class="com.yxm.spring5.bean.Book">
+        <property name="list" ref="bookList"></property>
+    </bean>
+</beans>
