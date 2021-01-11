@@ -29,7 +29,7 @@ public class TestBean {
     @Test
     public void test1() {
         //加载配置文件
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean3.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean4.xml");
         //2.获取对象
         Emp emp = applicationContext.getBean("emp", Emp.class);
         System.out.println(emp);
