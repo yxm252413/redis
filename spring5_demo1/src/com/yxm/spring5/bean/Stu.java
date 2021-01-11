@@ -14,6 +14,13 @@ import java.util.Set;
 public class Stu {
     private String[] course;
     private List<String> list;
+
+    public void setListCourse(List<Course> listCourse) {
+        this.listCourse = listCourse;
+    }
+
+    //一个学生学习多门课程
+    private List<Course> listCourse;
     private Map<String, String> map;
     private Set<String> set;
 
@@ -41,5 +48,6 @@ public class Stu {
         System.out.println(list);
         System.out.println(map);
         System.out.println(set);
+        System.out.println(listCourse);
     }
 }
