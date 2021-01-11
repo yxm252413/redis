@@ -2,8 +2,10 @@ package com.yxm.spring5.test;
 
 import com.yxm.spring5.Book2;
 import com.yxm.spring5.bean.Book;
+import com.yxm.spring5.bean.Course;
 import com.yxm.spring5.bean.Emp;
 import com.yxm.spring5.bean.Stu;
+import com.yxm.spring5.factoryBean.MyBean;
 import com.yxm.spring5.server.UserService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -58,5 +60,15 @@ public class TestBean {
         Book book = applicationContext.getBean("book", Book.class);
         System.out.println(book);
         book.test();
+    }
+
+    //工厂bean
+    @Test
+    public void test5() {
+        //加载配置文件
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("MyBean.xml");
+        //2.获取对象
+        Course myBean = applicationContext.getBean("myBean", Course.class);
+        System.out.println(myBean);
     }
 }
