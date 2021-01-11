@@ -71,4 +71,18 @@ public class TestBean {
         Course myBean = applicationContext.getBean("myBean", Course.class);
         System.out.println(myBean);
     }
+
+    //验证默认情况下bean是单实例
+    @Test
+    public void test6() {
+        //加载配置文件
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("Book.xml");
+        //2.获取对象
+        Book book = applicationContext.getBean("book", Book.class);
+        Book book1 = applicationContext.getBean("book", Book.class);
+//        地址一样，说明是单实例
+        System.out.println(book);//com.yxm.spring5.bean.Book@5d11346
+        System.out.println(book1);//com.yxm.spring5.bean.Book@5d11346
+        book.test();
+    }
 }
