@@ -6,4 +6,5 @@
     <bean id="orders" class="com.yxm.spring5.bean.Orders" init-method="initMethod" destroy-method="destoryMethod">
         <property name="oname" value="麻辣拌"></property>
     </bean>
+    <bean id="beanPost" class="com.yxm.spring5.bean.BeanPost"></bean>
 </beans>
