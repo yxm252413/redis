@@ -1,10 +1,7 @@
 package com.yxm.spring5.test;
 
 import com.yxm.spring5.Book2;
-import com.yxm.spring5.bean.Book;
-import com.yxm.spring5.bean.Course;
-import com.yxm.spring5.bean.Emp;
-import com.yxm.spring5.bean.Stu;
+import com.yxm.spring5.bean.*;
 import com.yxm.spring5.factoryBean.MyBean;
 import com.yxm.spring5.server.UserService;
 import org.junit.Test;
@@ -85,6 +82,7 @@ public class TestBean {
         System.out.println(book1);//com.yxm.spring5.bean.Book@5d11346
         book.test();
     }
+
     //验证默认情况下bean是单实例
     /*<bean id="book" class="com.yxm.spring5.bean.Book" scope="prototype">
         <property name="list" ref="bookList"></property>
@@ -99,5 +97,18 @@ public class TestBean {
         System.out.println(book);//com.yxm.spring5.bean.Book@5d11346a
         System.out.println(book1);//com.yxm.spring5.bean.Book@7a36aefa
         book.test();
+    }
+
+    @Test
+    public void test8() {
+        //加载配置文件
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("Orders.xml");
+        //2.获取对象
+        Orders orders = applicationContext.getBean("orders", Orders.class);
+        System.out.println("4.bean可以使用了（获取对象）");
+        System.out.println(orders);
+
+        //手动销毁
+        applicationContext.close();
     }
 }
